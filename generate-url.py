@@ -20,12 +20,12 @@ import argparse
 
 def parse_args():
     parser = argparse.ArgumentParser(prog="generate-url",
-                                    description='Generate Git Push Notification URLs for Jenkins.')
+                                     description='Generate Git Push Notification URLs for Jenkins.')
     required = parser.add_argument_group('arguments')
     required.add_argument('--jenkins', type=str, required=True,
-                        help='Jenkins URL (https://<url>:[<port>])')
+                          help='Jenkins URL (https://<url>:[<port>])')
     required.add_argument('--repo', type=str, required=True,
-                        help='Git Repository URL (ssh://<url> or https://<url>)')
+                          help='Git Repository URL (ssh://<url> or https://<url>)')
 
     return parser.parse_args()
 
@@ -43,4 +43,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
