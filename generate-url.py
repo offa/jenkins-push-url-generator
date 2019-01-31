@@ -23,7 +23,7 @@ def parse_args():
                                      description='Generate Git Push Notification URLs for Jenkins.')
     required = parser.add_argument_group('arguments')
     required.add_argument('--jenkins', '-j', type=str, required=True,
-                          help='Jenkins URL (https://<url>:[<port>])')
+                          help='Jenkins URL (https://<url>[:<port>])')
     required.add_argument('--repo', '-r', type=str, required=True,
                           help='Git Repository URL (ssh://<url> or https://<url>)')
 
