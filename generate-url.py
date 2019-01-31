@@ -19,7 +19,8 @@ import argparse
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Generate Git Push Notification URLs for Jenkins.')
+    parser = argparse.ArgumentParser(prog="generate-url",
+                                    description='Generate Git Push Notification URLs for Jenkins.')
     parser.add_argument('--repo', dest='repo', action='store',
                         help='Git Repository URL (ssh://<url> or https://<url>)')
     parser.add_argument('--jenkins', dest='jenkins', action='store',
