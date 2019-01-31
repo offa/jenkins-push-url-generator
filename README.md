@@ -7,7 +7,7 @@ Generates [Push Notification URLs](https://wiki.jenkins.io/display/JENKINS/Git+P
 
 ```sh
 python generate-url.py -j https://example.jenkins.org:9090 -r git@example.com:abc/git-repo.git
-`````
+```
 
 Use `python generate-url.py --help` for more information.
 
