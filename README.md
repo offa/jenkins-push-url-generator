@@ -10,7 +10,7 @@ Generates [Push Notification URLs](https://wiki.jenkins.io/display/JENKINS/Git+P
 python generate-url.py -j https://example.jenkins.org:9090 -r git@example.com:abc/git-repo.git
 
 # Load host from list predefined in 'jenkins.conf'
-python generate-url.py -e prod https://example.jenkins.org:9090 -r git@example.com:abc/git-repo.git
+python generate-url.py -e prod -r git@example.com:abc/git-repo.git
 ```
 
 Use `python generate-url.py --help` for more information.
