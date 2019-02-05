@@ -16,18 +16,31 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
+import configparser
+
+CONFIG_FILE = 'jenkins.conf'
 
 
 def parse_args():
     parser = argparse.ArgumentParser(prog="generate-url",
                                      description='Generate Git Push Notification URLs for Jenkins.')
     required = parser.add_argument_group('arguments')
-    required.add_argument('--jenkins', '-j', type=str, required=True,
+    required.add_argument('--jenkins', '-j', type=str,
                           help='Jenkins URL (https://<url>[:<port>])')
+    required.add_argument('--environment', '-e', type=str,
+                          help='Jenkins Environment (jenkins.conf)')
     required.add_argument('--repo', '-r', type=str, required=True,
                           help='Git Repository URL (ssh://<url> or https://<url>)')
 
     return parser.parse_args()
+
+
+def load_from_file(env_name):
+    cfg = configparser.ConfigParser()
+    cfg.read(CONFIG_FILE)
+    host = cfg['instances'][env_name]
+
+    return "https://{}".format(host)
 
 
 def generate_url(repo, jenkins):
@@ -37,7 +50,15 @@ def generate_url(repo, jenkins):
 def main():
     args = parse_args()
 
-    notification_url = generate_url(args.repo, args.jenkins)
+    if args.jenkins:
+        repo_url = args.jenkins
+    elif args.environment:
+        repo_url = load_from_file(args.environment)
+    else:
+        repo_url = "<URL>:<PORT>"
+
+
+    notification_url = generate_url(args.repo, repo_url)
     print("Push Notification URL:\n\n{}\n".format(notification_url))
 
 
