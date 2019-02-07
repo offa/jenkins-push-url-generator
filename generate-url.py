@@ -33,7 +33,7 @@ def parse_args():
                           help='Git Repository URL (ssh://<url> or https://<url>)')
     parser.add_argument('--quiet', '-q', action='store_true',
                         help='Prints URL only')
-    parser.add_argument('--version', action='version', version="%(prog)s 0.0.1",
+    parser.add_argument('--version', '-v', action='version', version="%(prog)s 0.0.1",
                         help='Shows the program version')
 
     return parser.parse_args()
