@@ -31,6 +31,8 @@ def parse_args():
                           help='Jenkins Environment (jenkins.conf)')
     required.add_argument('--repo', '-r', type=str, required=True,
                           help='Git Repository URL (ssh://<url> or https://<url>)')
+    parser.add_argument('--quiet', '-q', action='store_true',
+                        help='Prints URL only')
     parser.add_argument('--version', action='version', version="%(prog)s 0.0.1",
                         help='Shows the program version')
 
@@ -60,7 +62,11 @@ def main():
         repo_url = "<URL>:<PORT>"
 
     notification_url = generate_url(args.repo, repo_url)
-    print("Push Notification URL:\n\n{}\n".format(notification_url))
+
+    if args.quiet:
+        print("{}".format(notification_url))
+    else:
+        print("Push Notification URL:\n\n{}\n".format(notification_url))
 
 
 if __name__ == '__main__':
