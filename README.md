@@ -21,7 +21,7 @@ Use `python generate-url.py --help` for more information.
 The `--environment` / `-e` options load the host and port by name from the `jenkins.conf` file.
 Each entry consists of a *name* and the *host* (with port) – `https://` is added by default.
 
-```init
+```ini
 [instances]
 prod = jenkins-prod-1:8080
 staging = jenkins-staging:8081
