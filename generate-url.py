@@ -57,20 +57,21 @@ def main():
     args = parse_args()
 
     if args.jenkins:
-        repo_url = args.jenkins
+        instances = [args.jenkins]
     elif args.all:
-        repo_url = 'ALL'
+        raise NotImplementedError
     elif args.environment:
-        repo_url = load_from_file(args.environment)
+        instances = [load_from_file(args.environment)]
     else:
-        repo_url = "<URL>:<PORT>"
+        instances = ["<URL>:<PORT>"]
 
-    notification_url = generate_url(args.repo, repo_url)
+    for instance in instances:
+        notification_url = generate_url(args.repo, instance)
 
-    if args.quiet:
-        print("{}".format(notification_url))
-    else:
-        print("Push Notification URL:\n\n{}\n".format(notification_url))
+        if args.quiet:
+            print("{}".format(notification_url))
+        else:
+            print("Push Notification URL:\n\n{}\n".format(notification_url))
 
 
 if __name__ == '__main__':
