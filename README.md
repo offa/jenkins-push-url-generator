@@ -22,7 +22,7 @@ Use `python generate-url.py --help` for more information.
 ##### Predefined environments
 
 The `--environment` / `-e` options load the host and port by name from the `jenkins.conf` file.
-Each entry consists of a *name* and the *host* (with port) – `https://` is added by default. Use `-a` / `--all` to generate URLs for all entries.
+Each entry consists of a *name* and the *host* (with port) – `https://` is added if not present. Use `-a` / `--all` to generate URLs for all entries.
 
 ```ini
 [instances]
