@@ -6,11 +6,14 @@ Generates [Push Notification URLs](https://wiki.jenkins.io/display/JENKINS/Git+P
 #### Usage
 
 ```sh
-# Pass host by parameter
+# URL for host passed by parameter
 python generate-url.py -j https://example.jenkins.org:9090 -r git@example.com:abc/git-repo.git
 
-# Load host from list predefined in 'jenkins.conf'
+# URL for 'prod' host predefined in 'jenkins.conf'
 python generate-url.py -e prod -r git@example.com:abc/git-repo.git
+
+# URL for all hosts predefined in 'jenkins.conf'
+python generate-url.py -a -r git@example.com:abc/git-repo.git
 ```
 
 Use `python generate-url.py --help` for more information.
@@ -19,7 +22,7 @@ Use `python generate-url.py --help` for more information.
 ##### Predefined environments
 
 The `--environment` / `-e` options load the host and port by name from the `jenkins.conf` file.
-Each entry consists of a *name* and the *host* (with port) – `https://` is added by default.
+Each entry consists of a *name* and the *host* (with port) – `https://` is added by default. Use `-a` / `--all` to generate URLs for all entries.
 
 ```ini
 [instances]
