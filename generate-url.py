@@ -41,19 +41,10 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_from_file(env_name):
+def load_config():
     cfg = configparser.ConfigParser()
     cfg.read(CONFIG_FILE)
-    host = cfg['instances'][env_name]
-
-    return (env_name, host)
-
-
-def load_all_from_file():
-    cfg = configparser.ConfigParser()
-    cfg.read(CONFIG_FILE)
-
-    return cfg['instances'].items()
+    return cfg['instances']
 
 
 def generate_url(repo, jenkins):
@@ -75,9 +66,9 @@ def main():
     if args.jenkins:
         instances = [(None, args.jenkins)]
     elif args.all:
-        instances = load_all_from_file()
+        instances = load_config().items()
     elif args.environment:
-        instances = [load_from_file(args.environment)]
+        instances = [(args.environment, load_config()[args.environment])]
     else:
         instances = [(None, "<URL>:<PORT>")]
 
