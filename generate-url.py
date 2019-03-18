@@ -29,6 +29,8 @@ def parse_args():
                           help='Jenkins URL (https://<url>[:<port>])')
     required.add_argument('--environment', '-e', type=str,
                           help='Jenkins Environment (jenkins.conf)')
+    required.add_argument('--all', '-a', action='store_true',
+                          help='All Jenkins Environments (jenkins.conf)')
     required.add_argument('--repo', '-r', type=str, required=True,
                           help='Git Repository URL (ssh://<url> or https://<url>)')
     parser.add_argument('--quiet', '-q', action='store_true',
@@ -56,6 +58,8 @@ def main():
 
     if args.jenkins:
         repo_url = args.jenkins
+    elif args.all:
+        repo_url = 'ALL'
     elif args.environment:
         repo_url = load_from_file(args.environment)
     else:
