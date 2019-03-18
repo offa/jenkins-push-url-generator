@@ -46,18 +46,19 @@ def load_from_file(env_name):
     cfg.read(CONFIG_FILE)
     host = cfg['instances'][env_name]
 
-    return (env_name, "https://{}".format(host))
+    return (env_name, host)
 
 
 def load_all_from_file():
     cfg = configparser.ConfigParser()
     cfg.read(CONFIG_FILE)
 
-    return [(name, "https://{}".format(host)) for (name, host) in cfg['instances'].items()]
+    return cfg['instances'].items()
 
 
 def generate_url(repo, jenkins):
-    return "{}/git/notifyCommit?url={}".format(jenkins, repo)
+    protocol = jenkins if jenkins.startswith('https://') else "https://{}".format(jenkins)
+    return "{}{}/git/notifyCommit?url={}".format(protocol, jenkins, repo)
 
 
 def print_url(url, name, quiet):
