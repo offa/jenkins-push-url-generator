@@ -46,35 +46,43 @@ def load_from_file(env_name):
     cfg.read(CONFIG_FILE)
     host = cfg['instances'][env_name]
 
-    return "https://{}".format(host)
+    return (env_name, "https://{}".format(host))
+
+
+def load_all_from_file():
+    cfg = configparser.ConfigParser()
+    cfg.read(CONFIG_FILE)
+
+    return [(name, "https://{}".format(host)) for (name, host) in cfg['instances'].items()]
 
 
 def generate_url(repo, jenkins):
     return "{}/git/notifyCommit?url={}".format(jenkins, repo)
 
 
-def print_url(url, quiet):
+def print_url(url, name, quiet):
     if quiet:
         print("{}".format(url))
     else:
-        print("Push Notification URL:\n\n{}\n".format(url))
+        prefix = " * {}:\t ".format(name) if name else 'Push Notification URL:\n\n'
+        print("{}{}".format(prefix, url))
 
 
 def main():
     args = parse_args()
 
     if args.jenkins:
-        instances = [args.jenkins]
+        instances = [(None, args.jenkins)]
     elif args.all:
-        raise NotImplementedError
+        instances = load_all_from_file()
     elif args.environment:
         instances = [load_from_file(args.environment)]
     else:
-        instances = ["<URL>:<PORT>"]
+        instances = [(None, "<URL>:<PORT>")]
 
-    for instance in instances:
-        notification_url = generate_url(args.repo, instance)
-        print_url(notification_url, args.quiet)
+    for (name, url) in instances:
+        notification_url = generate_url(args.repo, url)
+        print_url(notification_url, name, args.quiet)
 
 
 if __name__ == '__main__':
