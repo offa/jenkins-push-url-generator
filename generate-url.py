@@ -53,6 +53,13 @@ def generate_url(repo, jenkins):
     return "{}/git/notifyCommit?url={}".format(jenkins, repo)
 
 
+def print_url(url, quiet):
+    if quiet:
+        print("{}".format(url))
+    else:
+        print("Push Notification URL:\n\n{}\n".format(url))
+
+
 def main():
     args = parse_args()
 
@@ -67,11 +74,7 @@ def main():
 
     for instance in instances:
         notification_url = generate_url(args.repo, instance)
-
-        if args.quiet:
-            print("{}".format(notification_url))
-        else:
-            print("Push Notification URL:\n\n{}\n".format(notification_url))
+        print_url(notification_url, args.quiet)
 
 
 if __name__ == '__main__':
