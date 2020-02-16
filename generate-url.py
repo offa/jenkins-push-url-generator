@@ -48,8 +48,8 @@ def load_config():
 
 
 def generate_url(repo, jenkins):
-    protocol = "https://" if jenkins.startswith('https://') else "https://"
-    return "{}{}/git/notifyCommit?url={}".format(protocol, jenkins, repo)
+    url_prefix = "" if jenkins.startswith('https://') or jenkins.startswith("http://") else "https://"
+    return "{}{}/git/notifyCommit?url={}".format(url_prefix, jenkins, repo)
 
 
 def print_url(url, name, quiet):
