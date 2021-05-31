@@ -7,13 +7,13 @@ Generates [Push Notification URLs](https://wiki.jenkins.io/display/JENKINS/Git+P
 
 ```sh
 # URL for host passed by parameter
-python generate-url.py -j https://example.jenkins.org:9090 -r git@example.com:abc/git-repo.git
+python generate_url.py -j https://example.jenkins.org:9090 -r git@example.com:abc/git-repo.git
 
 # URL for 'prod' host predefined in 'jenkins.conf'
-python generate-url.py -e prod -r git@example.com:abc/git-repo.git
+python generate_url.py -e prod -r git@example.com:abc/git-repo.git
 
 # URL for all hosts predefined in 'jenkins.conf'
-python generate-url.py -a -r git@example.com:abc/git-repo.git
+python generate_url.py -a -r git@example.com:abc/git-repo.git
 ```
 
 Use `python generate-url.py --help` for more information.
