@@ -25,17 +25,25 @@ def parse_args():
     parser = argparse.ArgumentParser(prog="generate-url",
                                      description='Generate Git Push Notification URLs for Jenkins.')
     required = parser.add_argument_group('arguments')
-    required.add_argument('--jenkins', '-j', type=str,
-                          help='Jenkins URL (https://<url>[:<port>])')
-    required.add_argument('--environment', '-e', type=str,
+    required.add_argument('--jenkins', '-j', type=str, help='Jenkins URL (https://<url>[:<port>])')
+    required.add_argument('--environment',
+                          '-e',
+                          type=str,
                           help='Jenkins Environment (jenkins.conf)')
-    required.add_argument('--all', '-a', action='store_true',
+    required.add_argument('--all',
+                          '-a',
+                          action='store_true',
                           help='All Jenkins Environments (jenkins.conf)')
-    required.add_argument('--repo', '-r', type=str, required=True,
+    required.add_argument('--repo',
+                          '-r',
+                          type=str,
+                          required=True,
                           help='Git Repository URL (ssh://<url> or https://<url>)')
-    parser.add_argument('--quiet', '-q', action='store_true',
-                        help='Prints URL only')
-    parser.add_argument('--version', '-v', action='version', version="%(prog)s 0.0.1",
+    parser.add_argument('--quiet', '-q', action='store_true', help='Prints URL only')
+    parser.add_argument('--version',
+                        '-v',
+                        action='version',
+                        version="%(prog)s 0.0.1",
                         help='Shows the program version')
 
     return parser.parse_args()
@@ -48,7 +56,8 @@ def load_config():
 
 
 def generate_url(repo, jenkins):
-    url_prefix = "" if jenkins.startswith('https://') or jenkins.startswith("http://") else "https://"
+    url_prefix = "" if jenkins.startswith('https://') or jenkins.startswith(
+        "http://") else "https://"
     return "{}{}/git/notifyCommit?url={}".format(url_prefix, jenkins, repo)
 
 
