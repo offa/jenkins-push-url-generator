@@ -23,7 +23,7 @@ VERSION = "0.0.1"
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(prog="generate-url",
+    parser = argparse.ArgumentParser(prog="generate_url",
                                      description='Generate Git Push Notification URLs for Jenkins.')
     required = parser.add_argument_group('arguments')
     required.add_argument('--jenkins', '-j', type=str, help='Jenkins URL (https://<url>[:<port>])')
@@ -46,7 +46,6 @@ def parse_args():
                         action='version',
                         version="%(prog)s {}".format(VERSION),
                         help='Shows the program version')
-
     return parser.parse_args()
 
 
