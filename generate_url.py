@@ -19,6 +19,7 @@ import argparse
 import configparser
 
 CONFIG_FILE = 'jenkins.conf'
+VERSION = "0.0.1"
 
 
 def parse_args():
@@ -43,7 +44,7 @@ def parse_args():
     parser.add_argument('--version',
                         '-v',
                         action='version',
-                        version="%(prog)s 0.0.1",
+                        version="%(prog)s {}".format(VERSION),
                         help='Shows the program version')
 
     return parser.parse_args()
