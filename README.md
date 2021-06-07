@@ -1,5 +1,10 @@
 # Jenkins Push URL Generator
 
+[![CI](https://github.com/offa/jenkins-push-url-generator/workflows/ci/badge.svg)](https://github.com/offa/jenkins-push-url-generator/actions)
+[![GitHub release](https://img.shields.io/github/release/offa/jenkins-push-url-generator.svg)](https://github.com/offa/jenkins-push-url-generator/releases)
+[![License](https://img.shields.io/badge/license-GPLv3-yellow.svg)](LICENSE)
+![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg)
+
 Generates [Push Notification URLs](https://wiki.jenkins.io/display/JENKINS/Git+Plugin) to be used by Git repositories to trigger [Jenkins](https://jenkins.io/) builds.
 
 
