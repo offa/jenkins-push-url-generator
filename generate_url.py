@@ -19,7 +19,7 @@ import argparse
 import configparser
 
 CONFIG_FILE = 'jenkins.conf'
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 
 
 def parse_args():
