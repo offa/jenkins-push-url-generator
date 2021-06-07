@@ -35,10 +35,9 @@ def parse_args():
                           '-a',
                           action='store_true',
                           help='All Jenkins Environments (jenkins.conf)')
-    required.add_argument('--repo',
-                          '-r',
+    required.add_argument('repo',
                           type=str,
-                          required=True,
+                          nargs="+",
                           help='Git Repository URL (ssh://<url> or https://<url>)')
     parser.add_argument('--quiet', '-q', action='store_true', help='Prints URL only')
     parser.add_argument('--version',
@@ -81,9 +80,10 @@ def main():
     else:
         instances = [(None, "<URL>:<PORT>")]
 
-    for (name, url) in instances:
-        notification_url = generate_url(args.repo, url)
-        print_url(notification_url, name, args.quiet)
+    for repo in args.repo:
+        for (name, url) in instances:
+            notification_url = generate_url(repo, url)
+            print_url(notification_url, name, args.quiet)
 
 
 if __name__ == '__main__':
