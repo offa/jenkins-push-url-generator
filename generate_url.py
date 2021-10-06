@@ -43,7 +43,7 @@ def parse_args():
     parser.add_argument('--version',
                         '-v',
                         action='version',
-                        version="%(prog)s {}".format(VERSION),
+                        version=f"%(prog)s {VERSION}",
                         help='Shows the program version')
     return parser.parse_args()
 
@@ -57,15 +57,15 @@ def load_config():
 def generate_url(repo, jenkins):
     url_prefix = "" if jenkins.startswith('https://') or jenkins.startswith(
         "http://") else "https://"
-    return "{}{}/git/notifyCommit?url={}".format(url_prefix, jenkins, repo)
+    return f"{url_prefix}{jenkins}/git/notifyCommit?url={repo}"
 
 
 def print_url(url, name, quiet):
     if quiet:
-        print("{}".format(url))
+        print(f"{url}")
     else:
-        prefix = " * {}:\t ".format(name) if name else 'Push Notification URL:\n\n'
-        print("{}{}".format(prefix, url))
+        prefix = f" * {name}:\t " if name else 'Push Notification URL:\n\n'
+        print(f"{prefix}{url}")
 
 
 def main():
