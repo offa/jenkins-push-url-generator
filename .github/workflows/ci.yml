@@ -21,3 +21,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Test
         run: pylint *.py
+      - name: Check formatting
+        uses: AlexanderMelde/yapf-action@master
+        with:
+          args: --verbose
