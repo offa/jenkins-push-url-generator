@@ -12,13 +12,13 @@ Generates [Push Notification URLs](https://plugins.jenkins.io/git/#plugin-conten
 
 ```sh
 # URL for host passed by parameter
-python generate_url.py -j https://example.jenkins.org:9090 git@example.com:abc/git-repo.git
+python generate_url.py -j https://ci.example.org:9090 -t 9f287293553540997f919afe1c02cce9111e80d5 git@example.com:ex/git-repo.git
 
 # URL for 'prod' host predefined in 'jenkins.conf'
-python generate_url.py -e prod git@example.com:abc/git-repo.git
+python generate_url.py -e prod -t bd44e92b89971150123a9d837d1481095611c32c git@example.com:ex/git-repo.git
 
 # URL for all hosts predefined in 'jenkins.conf'
-python generate_url.py -a git@example.com:abc/git-repo.git
+python generate_url.py -a -t 25e575a3fbb2f32f083e8768b757fb5fc082bfe5 git@example.com:ex/git-repo.git
 ```
 
 Use `python generate-url.py --help` for more information.
@@ -32,6 +32,5 @@ Each entry consists of a *name* and the *host* (with a optional port). `https://
 ```ini
 [instances]
 prod = jenkins-prod-1
-staging = jenkins-staging:8081
 test = jenkins-test:8082
 ```
