@@ -26,7 +26,11 @@ def parse_args():
     parser = argparse.ArgumentParser(prog="generate_url",
                                      description='Generate Git Push Notification URLs for Jenkins.')
     required = parser.add_argument_group('arguments')
-    required.add_argument('--jenkins', '-j', type=str, help='Jenkins URL (https://<url>[:<port>])')
+    required.add_argument('--jenkins',
+                          '-j',
+                          type=str,
+                          help='Jenkins URL (https://<url>[:<port>])',
+                          required=True)
     required.add_argument('--environment',
                           '-e',
                           type=str,
@@ -35,6 +39,7 @@ def parse_args():
                           '-a',
                           action='store_true',
                           help='All Jenkins Environments (jenkins.conf)')
+    required.add_argument('--token', '-t', type=str, help='Access token', required=True)
     required.add_argument('repo',
                           type=str,
                           nargs="+",
@@ -54,10 +59,10 @@ def load_config():
     return cfg['instances']
 
 
-def generate_url(repo, jenkins):
+def generate_url(repo, jenkins, token):
     url_prefix = "" if jenkins.startswith('https://') or jenkins.startswith(
         "http://") else "https://"
-    return f"{url_prefix}{jenkins}/git/notifyCommit?url={repo}"
+    return f"{url_prefix}{jenkins}/git/notifyCommit?url={repo}&token={token}"
 
 
 def print_url(url, name, quiet):
@@ -82,7 +87,7 @@ def main():
 
     for repo in args.repo:
         for (name, url) in instances:
-            notification_url = generate_url(repo, url)
+            notification_url = generate_url(repo, url, args.token)
             print_url(notification_url, name, args.quiet)
 
 
