@@ -19,8 +19,10 @@ jobs:
           cache: 'pip'
       - name: Install Dependencies
         run: pip install -r requirements.txt
-      - name: Test
+      - name: Lint (pylint)
         run: pylint *.py
+      - name: Lint (ruff)
+        run: ruff check --output-format=github .
 
   formatting:
     name: formatting
@@ -28,7 +30,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@main
-      - name: Check formatting
-        uses: AlexanderMelde/yapf-action@master
+      - name: Setup Python
+        uses: actions/setup-python@main
         with:
-          args: --verbose
+          python-version: "3.12"
+          cache: 'pip'
+      - name: Setup
+        run: pip install -r requirements.txt
+      - name: Check Formatting
+        run: ruff format --check --diff .
