@@ -3,7 +3,7 @@
 [![CI](https://github.com/offa/jenkins-push-url-generator/workflows/ci/badge.svg)](https://github.com/offa/jenkins-push-url-generator/actions)
 [![GitHub release](https://img.shields.io/github/release/offa/jenkins-push-url-generator.svg)](https://github.com/offa/jenkins-push-url-generator/releases)
 [![License](https://img.shields.io/badge/license-GPLv3-yellow.svg)](LICENSE)
-![Python 3.9](https://img.shields.io/badge/python-3.9-green.svg)
+![Python 3.9](https://img.shields.io/badge/python-3.10-green.svg)
 
 Generates [Push Notification URLs](https://plugins.jenkins.io/git/#plugin-content-push-notification-from-repository) to be used by Git repositories to trigger [Jenkins](https://jenkins.io/) builds.
 
