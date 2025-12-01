@@ -1,2 +1,2 @@
-pylint==4.0.3
+pylint==4.0.4
 ruff==0.14.7
