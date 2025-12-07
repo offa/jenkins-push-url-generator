@@ -22,7 +22,7 @@ CONFIG_FILE = "jenkins.conf"
 __version__ = "0.1.2.dev0"
 
 
-def parse_args():
+def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog="generate_url",
         description="Generate Git Push Notification URLs for Jenkins.",
@@ -62,13 +62,13 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_config():
+def load_config() -> configparser.SectionProxy:
     cfg = configparser.ConfigParser()
     cfg.read(CONFIG_FILE)
     return cfg["instances"]
 
 
-def generate_url(repo, jenkins, token):
+def generate_url(repo: str, jenkins: str, token: str) -> str:
     url_prefix = (
         ""
         if jenkins.startswith("https://") or jenkins.startswith("http://")
@@ -77,7 +77,7 @@ def generate_url(repo, jenkins, token):
     return f"{url_prefix}{jenkins}/git/notifyCommit?url={repo}&token={token}"
 
 
-def print_url(url, name, quiet):
+def print_url(url: str, name, quiet) -> None:
     if quiet:
         print(f"{url}")
     else:
