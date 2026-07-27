@@ -69,11 +69,7 @@ def load_config() -> configparser.SectionProxy:
 
 
 def generate_url(repo: str, jenkins: str, token: str) -> str:
-    url_prefix = (
-        ""
-        if jenkins.startswith("https://") or jenkins.startswith("http://")
-        else "https://"
-    )
+    url_prefix = "" if jenkins.startswith(("https://", "http://")) else "https://"
     return f"{url_prefix}{jenkins}/git/notifyCommit?url={repo}&token={token}"
 
 
